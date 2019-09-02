@@ -29,25 +29,25 @@ tasks:
         do: stop
 
   create_roles1:
-    action: core.http url="http://10.236.114.173:8080/testServlet/hello"
+    action: core.http url="http://10.236.114.173:8080/testServlet/role"
     next:
       - when: <% succeeded() %>
         do: create_roles2
       - when: <% failed() %>
         do: stop
-
+         
   create_roles2:
-    action: core.http method="POST" url="http://10.236.114.173:8080/testServlet/hello" body='{\"name\":\"tina\"}'
+    action: core.http method="POST" url="http://10.236.114.173:8080/testServlet/role" body='{\"name\":\"tina\"}'
     next:
       - when: <% succeeded() %>
         publish: response=<% result().body %>
         do: finish
       - when: <% failed() %>
         do: stop
-
+    
   finish:
     action: core.echo message=<% ctx('response') %>
-
+    
   stop:
     action: core.echo message="Automation stopped."
     next:
