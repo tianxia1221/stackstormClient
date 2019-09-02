@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class Hello extends HttpServlet {
+public class MethodForStCall extends HttpServlet {
 
-    public Hello() {
+    public MethodForStCall() {
         super();
     }
 

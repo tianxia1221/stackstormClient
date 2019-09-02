@@ -1,0 +1,6 @@
+---
+name: orquesta-ask-idm-workflow
+description: A basic workflow that creates idm roles.
+runner_type: orquesta
+entry_point: workflows/orquesta-ask-idm-workflow.yaml
+enabled: true

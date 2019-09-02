@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>testServlet</display-name>
+
   <servlet>
-    <servlet-name>QuickStartServlet</servlet-name>
-    <servlet-class>com.tx.servlet.QuickStartServlet</servlet-class>
+    <servlet-name>MethodForStCall</servlet-name>
+    <servlet-class>com.tx.servlet.MethodForStCall</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>QuickStartServlet</servlet-name>
-    <url-pattern>/quickstartservlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Hello</servlet-name>
-    <servlet-class>com.tx.servlet.Hello</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Hello</servlet-name>
-    <url-pattern>/hello</url-pattern>
+    <servlet-name>MethodForStCall</servlet-name>
+    <url-pattern>/role</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Workflow</servlet-name>
