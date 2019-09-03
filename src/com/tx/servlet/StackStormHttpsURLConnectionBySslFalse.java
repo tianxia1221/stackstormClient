@@ -26,14 +26,14 @@ import javax.net.ssl.TrustManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class StackStormHttpURLConnection {
+public class StackStormHttpsURLConnectionBySslFalse {
 
 	// private final String USER_AGENT = "Mozilla/5.0";
 	private String token;
-	private StackStormHttpURLConnection http;
+	private StackStormHttpsURLConnectionBySslFalse http;
 
 	public static void main(String[] args) throws Exception {
-		StackStormHttpURLConnection http = new StackStormHttpURLConnection();
+		StackStormHttpsURLConnectionBySslFalse http = new StackStormHttpsURLConnectionBySslFalse();
 
 		trustAllHttpsCertificates();
 		HttpsURLConnection.setDefaultHostnameVerifier(new CustomizedHostnameVerifier());
@@ -43,7 +43,7 @@ public class StackStormHttpURLConnection {
 	}
 
 	public void init() throws Exception {
-		http = new StackStormHttpURLConnection();
+		http = new StackStormHttpsURLConnectionBySslFalse();
 
 		trustAllHttpsCertificates();
 		HttpsURLConnection.setDefaultHostnameVerifier(new CustomizedHostnameVerifier());
@@ -53,7 +53,7 @@ public class StackStormHttpURLConnection {
 	}
 
 	public int createWorkflow() throws Exception {
-		http = new StackStormHttpURLConnection();
+		http = new StackStormHttpsURLConnectionBySslFalse();
 
 		trustAllHttpsCertificates();
 		HttpsURLConnection.setDefaultHostnameVerifier(new CustomizedHostnameVerifier());
@@ -72,7 +72,7 @@ public class StackStormHttpURLConnection {
 	}
 
 	private void getTokenByPostMethod() throws Exception {
-		String url = "https://10.10.10.10/auth/v1/tokens";
+		String url = "https://stackstorm/auth/v1/tokens";
 		String authString = "st2admin:Ch@ngeMe";
 
 		URL obj = new URL(url);
@@ -108,7 +108,7 @@ public class StackStormHttpURLConnection {
 	}
 
 	public int createWorkflowInstanceByPostMethod1() throws IOException {
-		String url = "https://10.10.10.10/api/v1/executions";
+		String url = "https://stackstorm/api/v1/executions";
 		// String body = "{\"action\": \"examples.orquesta-ask-basic\"}";
 
 		String body = "{\"action\": \"examples.orquesta-ask-idm-workflow\"}";
@@ -160,7 +160,7 @@ public class StackStormHttpURLConnection {
 
 	private void createWorkflowInstanceByPostMethod() throws Exception {
 
-		String url = "https://10.10.10.10/api/v1/executions";
+		String url = "https://stackstorm/api/v1/executions";
 		String body = "{\"action\": \"examples.orquesta-ask-basic\"}";
 		// String body = "{action: orquesta-ask-basic}";
 		byte[] postDataBytes = body.toString().getBytes("UTF-8");
@@ -214,7 +214,7 @@ public class StackStormHttpURLConnection {
 	// HTTP GET request
 	private void getsample() throws Exception {
 
-		String url = "https://10.10.10.10/auth/v1/tokens";
+		String url = "https://stackstorm/auth/v1/tokens";
 
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -246,7 +246,7 @@ public class StackStormHttpURLConnection {
 	// // HTTP POST request
 	// private void getTokenByPostMethod() throws Exception {
 	//
-	// String url = "https://10.10.10.10/auth/v1/tokens";
+	// String url = "https://stackstorm/auth/v1/tokens";
 	// URL obj = new URL(url);
 	// HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 	//

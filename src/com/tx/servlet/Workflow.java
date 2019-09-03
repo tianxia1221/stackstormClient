@@ -19,10 +19,10 @@ public class Workflow extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private StackStormHttpURLConnection http;
+	private StackStormHttpsURLConnectionBySslFalse http;
 	
 	public void init() throws ServletException {
-		http = new StackStormHttpURLConnection();
+		http = new StackStormHttpsURLConnectionBySslFalse();
 //		try {
 //			http.init();
 //		} catch (Exception e) {
