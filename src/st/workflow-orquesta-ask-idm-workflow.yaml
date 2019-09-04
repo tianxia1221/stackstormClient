@@ -2,12 +2,16 @@ version: 1.0
 
 description: A basic workflow that creates idm roles.
 
+input:
+  - user
+  - role
+
 vars:
   - response: null
 
 tasks:
   start:
-    action: core.echo message="Automation started."
+    action: core.echo message="Automation started. user=<% ctx('user')%>" 
     next:
       - when: <% succeeded() %>
         do: get_approval
@@ -24,7 +28,7 @@ tasks:
             required: True
     next:
       - when: <% succeeded() %>
-        do: create_roles1
+        do: create_roles1 
       - when: <% failed() %>
         do: stop
 
@@ -32,22 +36,22 @@ tasks:
     action: core.http url="http://10.236.114.173:8080/testServlet/role"
     next:
       - when: <% succeeded() %>
-        do: create_roles2
+        do: create_roles2 
       - when: <% failed() %>
         do: stop
-         
+
   create_roles2:
-    action: core.http method="POST" url="http://10.236.114.173:8080/testServlet/role" body='{\"name\":\"tina\"}'
+    action: core.http method="POST" url="http://10.236.114.173:8080/testServlet/role" body="{name:<% ctx('user')%>}"
     next:
       - when: <% succeeded() %>
         publish: response=<% result().body %>
         do: finish
       - when: <% failed() %>
         do: stop
-    
+
   finish:
     action: core.echo message=<% ctx('response') %>
-    
+
   stop:
     action: core.echo message="Automation stopped."
     next:
