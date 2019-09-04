@@ -39,7 +39,7 @@ public class StackStormHttpsURLConnectionBySslFalse {
 		HttpsURLConnection.setDefaultHostnameVerifier(new CustomizedHostnameVerifier());
 
 		http.getTokenByPostMethod();
-		http.createWorkflowInstanceByPostMethod1();
+		http.createWorkflowInstanceByPostMethod("pushu");
 	}
 
 	public void init() throws Exception {
@@ -49,17 +49,17 @@ public class StackStormHttpsURLConnectionBySslFalse {
 		HttpsURLConnection.setDefaultHostnameVerifier(new CustomizedHostnameVerifier());
 
 		http.getTokenByPostMethod();
-		http.createWorkflowInstanceByPostMethod1();
+		http.createWorkflowInstanceByPostMethod("pushu");
 	}
 
-	public int createWorkflow() throws Exception {
+	public int createWorkflow(String user) throws Exception {
 		http = new StackStormHttpsURLConnectionBySslFalse();
 
 		trustAllHttpsCertificates();
 		HttpsURLConnection.setDefaultHostnameVerifier(new CustomizedHostnameVerifier());
 
 		http.getTokenByPostMethod();
-		return http.createWorkflowInstanceByPostMethod1();
+		return http.createWorkflowInstanceByPostMethod(user);
 	}
 
 	private static void trustAllHttpsCertificates() throws Exception {
@@ -107,12 +107,13 @@ public class StackStormHttpsURLConnectionBySslFalse {
 		System.out.println(response.toString());
 	}
 
-	public int createWorkflowInstanceByPostMethod1() throws IOException {
+	public int createWorkflowInstanceByPostMethod(String user) throws IOException {
 		String url = "https://stackstorm/api/v1/executions";
 		// String body = "{\"action\": \"examples.orquesta-ask-basic\"}";
 
-		String body = "{\"action\": \"examples.orquesta-ask-idm-workflow\"}";
-
+		//String body = "{\"action\": \"examples.orquesta-ask-idm-workflow\"}";
+		String bodyFormat = "{\"action\": \"examples.orquesta-ask-idm-workflow\",\"parameters\": {\"user\": \"%s\"}}";
+		String body = String.format(bodyFormat, user);
 		URL obj = new URL(url);
 		HttpsURLConnection connection = (HttpsURLConnection) obj.openConnection();
 
@@ -158,7 +159,7 @@ public class StackStormHttpsURLConnectionBySslFalse {
 		return responseCode;
 	}
 
-	private void createWorkflowInstanceByPostMethod() throws Exception {
+	private void createWorkflowInstanceByPostMethod2() throws Exception {
 
 		String url = "https://stackstorm/api/v1/executions";
 		String body = "{\"action\": \"examples.orquesta-ask-basic\"}";

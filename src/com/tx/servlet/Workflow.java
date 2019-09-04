@@ -60,7 +60,7 @@ public class Workflow extends HttpServlet {
 		//int resCode = http.createWorkflowInstanceByPostMethod1();
 		int resCode = 0;
 		try {
-			resCode = http.createWorkflow();
+			resCode = http.createWorkflow(user);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

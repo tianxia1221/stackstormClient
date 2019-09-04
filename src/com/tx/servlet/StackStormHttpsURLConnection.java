@@ -113,9 +113,9 @@ public class StackStormHttpsURLConnection {
 
 	public int createWorkflowInstanceByPostMethod1() throws IOException {
 		String url = "https://stackstorm/api/v1/executions";
-		// String body = "{\"action\": \"examples.orquesta-ask-basic\"}";
+		// String body = "{\"action\": \"examples.orquesta-ask-idm-workflow\"}";
 
-		String body = "{\"action\": \"examples.orquesta-ask-idm-workflow\"}";
+		String body = "{\"action\": \"examples.orquesta-https-test\",\"user\": \"zhangsan\"}";
 
 		URL obj = new URL(url);
 		HttpsURLConnection connection = (HttpsURLConnection) obj.openConnection();
