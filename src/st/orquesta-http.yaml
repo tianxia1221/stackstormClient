@@ -1,0 +1,14 @@
+---
+name: orquesta-https-test
+pack: examples
+description: A basic http test 
+runner_type: orquesta
+entry_point: workflows/orquesta-http-test.yaml
+enabled: true
+parameters:
+  user:
+    required: true
+    type: string
+  role:
+    type: string 
+    default: developer

@@ -1,0 +1,33 @@
+version: 1.0
+
+description: A basic http test 
+
+input:
+  - user
+  - role 
+
+vars:
+  - response: null
+
+tasks:
+  start:
+    action: core.echo message=<% ctx('role') %>
+    next:
+      - when: <% succeeded() %>
+        do: httpstest 
+
+  httpstest:
+    action: core.http url="https://x/testServlet/workflowssl" verify_ssl_cert=false
+    next:
+      - when: <% succeeded() %>
+        do: finish 
+      - when: <% failed() %>
+        do: stop
+
+  finish:
+    action: core.echo message=<% ctx('user') %>
+
+  stop:
+    action: core.echo message="Automation stopped."
+    next:
+      - do: fail
