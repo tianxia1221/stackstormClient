@@ -18,6 +18,17 @@
     <servlet-name>Workflow</servlet-name>
     <url-pattern>/workflow</url-pattern>
   </servlet-mapping>
+  
+  
+    <servlet>
+    <servlet-name>Workflowssl</servlet-name>
+    <servlet-class>com.tx.servlet.WorkflowSSL</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Workflowssl</servlet-name>
+    <url-pattern>/workflowssl</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

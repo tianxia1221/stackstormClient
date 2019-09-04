@@ -269,7 +269,9 @@ class miTM1 implements X509TrustManager {
     miTM1() throws Exception {
         // create a "default" JSSE X509TrustManager.
         KeyStore ks = KeyStore.getInstance("JKS");
-        ks.load(new FileInputStream("C:\\Workshop\\stackstorm\\stackstormClient\\resource\\st.keystore"),
+        // ks.load(new FileInputStream("C:\\Workshop\\stackstorm\\stackstormClient\\resource\\st.keystore"),
+        ks.load(this.getClass().getResourceAsStream("/st.keystore"),
+       // ks.load(new FileInputStream("st.keystore"),
                 "111111".toCharArray());
         TrustManagerFactory tmf =
                 TrustManagerFactory.getInstance("SunX509", "SunJSSE");
