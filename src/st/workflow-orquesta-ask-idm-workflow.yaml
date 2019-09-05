@@ -14,7 +14,13 @@ tasks:
     action: core.echo message="Automation started. user=<% ctx('user')%>" 
     next:
       - when: <% succeeded() %>
-        do: get_approval
+        do: email_approval 
+
+  email_approval:
+    action: email.send_email account='me' email_to=['xia.tian@dxc.com'] message="approval for user <% ctx('user')%>" email_from="xia.tian@dxc.com" subject="approval request"
+    next:
+      - when: <% succeeded() %>
+        do: get_approval 
 
   get_approval:
     action: core.ask
@@ -45,10 +51,15 @@ tasks:
     next:
       - when: <% succeeded() %>
         publish: response=<% result().body %>
-        do: finish
+        do: email_notification_done 
       - when: <% failed() %>
-        do: stop
+        do: stop 
 
+  email_notification_done:
+    action: email.send_email account='me' email_to=['xia.tian@dxc.com'] message="role has been created for user <% ctx('user')%>" email_from="xia.tian@dxc.com" subject="role done"
+    next:
+      - do: finish
+ 
   finish:
     action: core.echo message=<% ctx('response') %>
 

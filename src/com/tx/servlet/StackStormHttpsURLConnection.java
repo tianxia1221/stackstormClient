@@ -43,7 +43,7 @@ public class StackStormHttpsURLConnection {
 		HttpsURLConnection.setDefaultHostnameVerifier(new CustomizedHostnameVerifier1());
 
 		http.getTokenByPostMethod();
-		http.createWorkflowInstanceByPostMethod1();
+		http.createWorkflowInstanceByPostMethod("pushu");
 	}
 
 	public void init() throws Exception {
@@ -53,17 +53,17 @@ public class StackStormHttpsURLConnection {
 		HttpsURLConnection.setDefaultHostnameVerifier(new CustomizedHostnameVerifier1());
 
 		http.getTokenByPostMethod();
-		http.createWorkflowInstanceByPostMethod1();
+		http.createWorkflowInstanceByPostMethod("pushu");
 	}
 
-	public int createWorkflow() throws Exception {
+	public int createWorkflow(String user) throws Exception {
 		http = new StackStormHttpsURLConnection();
 
 		trustAllHttpsCertificates();
 		HttpsURLConnection.setDefaultHostnameVerifier(new CustomizedHostnameVerifier1());
 
 		http.getTokenByPostMethod();
-		return http.createWorkflowInstanceByPostMethod1();
+		return http.createWorkflowInstanceByPostMethod(user);
 	}
 
 	private static void trustAllHttpsCertificates() throws Exception {
@@ -111,11 +111,12 @@ public class StackStormHttpsURLConnection {
 		System.out.println(response.toString());
 	}
 
-	public int createWorkflowInstanceByPostMethod1() throws IOException {
+	public int createWorkflowInstanceByPostMethod(String user) throws IOException {
 		String url = "https://stackstorm/api/v1/executions";
 		// String body = "{\"action\": \"examples.orquesta-ask-idm-workflow\"}";
 
-		String body = "{\"action\": \"examples.orquesta-https-test\",\"user\": \"zhangsan\"}";
+		String bodyFormat = "{\"action\": \"examples.orquesta-ask-idm-workflow\",\"parameters\": {\"user\": \"%s\"}}";
+		String body = String.format(bodyFormat, user);
 
 		URL obj = new URL(url);
 		HttpsURLConnection connection = (HttpsURLConnection) obj.openConnection();
@@ -160,59 +161,6 @@ public class StackStormHttpsURLConnection {
 		connection.disconnect();
 
 		return responseCode;
-	}
-
-	private void createWorkflowInstanceByPostMethod() throws Exception {
-
-		String url = "https://stackstorm/api/v1/executions";
-		String body = "{\"action\": \"examples.orquesta-ask-basic\"}";
-		// String body = "{action: orquesta-ask-basic}";
-		byte[] postDataBytes = body.toString().getBytes("UTF-8");
-		URL obj = new URL(url);
-		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-
-		con.setHostnameVerifier(new CustomizedHostnameVerifier1());
-
-		con.setRequestMethod("POST");
-		con.setRequestProperty("X-Auth-Token", token);
-		con.setRequestProperty("Accept", "application/json");
-		con.setRequestProperty("Content-Type", "application/json; utf-8");
-		// con.setRequestProperty("Accept", "application/json; utf-8");
-		// con.setRequestProperty("Content-Length",
-		// String.valueOf(postDataBytes.length));
-
-		// // Send post request
-		// con.setDoOutput(true);
-		// DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-		// //wr.writeBytes(body);
-		// wr.writeChars(body);
-		// wr.write(postDataBytes);
-		// wr.flush();
-		// wr.close();
-		// 设置是否向HttpURLConnection输出
-		con.setDoOutput(true);
-		// 设置是否从httpUrlConnection读入
-		con.setDoInput(true);
-
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(con.getOutputStream(), "UTF-8"));
-		writer.write(body);
-		writer.close();
-
-		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'POST' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
-
-		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
-		in.close();
-
-		// print result
-		System.out.println(response.toString());
 	}
 
 	// HTTP GET request
@@ -269,9 +217,7 @@ class miTM1 implements X509TrustManager {
     miTM1() throws Exception {
         // create a "default" JSSE X509TrustManager.
         KeyStore ks = KeyStore.getInstance("JKS");
-        // ks.load(new FileInputStream("C:\\Workshop\\stackstorm\\stackstormClient\\resource\\st.keystore"),
         ks.load(this.getClass().getResourceAsStream("/st.keystore"),
-       // ks.load(new FileInputStream("st.keystore"),
                 "111111".toCharArray());
         TrustManagerFactory tmf =
                 TrustManagerFactory.getInstance("SunX509", "SunJSSE");
