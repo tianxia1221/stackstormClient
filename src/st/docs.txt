@@ -1,4 +1,4 @@
-root@stackstormtina:/opt/stackstorm/st2/local/lib/python2.7/site-packages/certifi# vim cacert.pem
+1. root@stackstormtina:/opt/stackstorm/st2/local/lib/python2.7/site-packages/certifi# vim cacert.pem
 
 -----BEGIN CERTIFICATE-----
 MIIDNzCCAh+gAwIBAgIET/lASzANBgkqhkiG9w0BAQsFADBMMQswCQYDVQQGEwJj
@@ -20,3 +20,17 @@ qUCiBbIusMPZY6tnYf4ywBH/7G0ttQP7443/IxTiP3HDBCzsNBMG+nXw8CYSOgBH
 W+5o26XVVRJT/rVtmaGcx643HL2BpIAjEjWwuyZ+7LGhCeuhTFqoNvQM63+fOLcx
 jikWbedX4G8oGQM=
 -----END CERTIFICATE-----
+
+
+2. root@stackstormtina:/etc# vim hosts
+
+127.0.0.1       localhost
+127.0.1.1       stackstormtina  stackstorm
+10.236.114.173 x
+# tina host
+10.236.114.173 ngp
+# indy host
+#10.236.114.147 ngp 
+
+
+3. keytool -import -file src_cer_file ¨Ckeystore dest_cer_store
