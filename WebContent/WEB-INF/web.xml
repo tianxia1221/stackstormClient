@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>testServlet</display-name>
-
+  <display-name>ngp</display-name>
   <servlet>
     <servlet-name>MethodForStCall</servlet-name>
     <servlet-class>com.tx.servlet.MethodForStCall</servlet-class>
@@ -18,9 +17,7 @@
     <servlet-name>Workflow</servlet-name>
     <url-pattern>/workflow</url-pattern>
   </servlet-mapping>
-  
-  
-    <servlet>
+  <servlet>
     <servlet-name>Workflowssl</servlet-name>
     <servlet-class>com.tx.servlet.WorkflowSSL</servlet-class>
   </servlet>
@@ -28,7 +25,6 @@
     <servlet-name>Workflowssl</servlet-name>
     <url-pattern>/workflowssl</url-pattern>
   </servlet-mapping>
-  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
