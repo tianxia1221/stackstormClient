@@ -17,7 +17,7 @@ tasks:
         do: email_approval 
 
   email_approval:
-    action: email.send_email account='me' email_to=['xia.tian@dxc.com'] message="approval for user <% ctx('user')%>" email_from="xia.tian@dxc.com" subject="approval request"
+    action: email.send_email account='me' email_to=['xia.tian@dxc.com'] message="approval for user <% ctx('user')%>" email_from="xia.tian@dxc.com" subject="stackstorm workflow - approval request"
     next:
       - when: <% succeeded() %>
         do: get_approval 
@@ -39,7 +39,7 @@ tasks:
         do: stop
 
   create_roles1:
-    action: core.http url="http://10.236.114.173:8080/testServlet/role"
+    action: core.http url="https://x:8443/ngp/role" verify_ssl_cert=true
     next:
       - when: <% succeeded() %>
         do: create_roles2 
@@ -47,16 +47,16 @@ tasks:
         do: stop
 
   create_roles2:
-    action: core.http method="POST" url="http://10.236.114.173:8080/testServlet/role" body="{name:<% ctx('user')%>}"
+    action: core.http method="POST" url="http://ngp:8080/ngp/role" body="{name:<% ctx('user')%>}"
     next:
       - when: <% succeeded() %>
         publish: response=<% result().body %>
-        do: email_notification_done 
+        do: email_role_done 
       - when: <% failed() %>
         do: stop 
 
-  email_notification_done:
-    action: email.send_email account='me' email_to=['xia.tian@dxc.com'] message="role has been created for user <% ctx('user')%>" email_from="xia.tian@dxc.com" subject="role done"
+  email_role_done:
+    action: email.send_email account='me' email_to=['xia.tian@dxc.com'] message="role has been created for user <% ctx('user')%>" email_from="xia.tian@dxc.com" subject="stackstorm workflow - role done"
     next:
       - do: finish
  
